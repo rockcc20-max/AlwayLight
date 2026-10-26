@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>AlwayLight · 屏幕常亮助手</title>
+    <link rel="icon" href="assets/icon-32.png">
+    <link rel="stylesheet" href="popup.css">
+    <script src="popup.js" type="module"></script>
+  </head>
+  <body>
+    <svg class="symbol-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></symbol>
+      <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v9m-6-6a9 9 0 1 0 12 0"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><circle cx="12" cy="14" r="8"/><path d="M12 10v4l2 2M9 2h6m-3 0v4m6 1 2-2"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M20 4C8 2 2 8 6 16s16 2 14-12ZM5 20l10-10"/></symbol>
+    </svg>
+
+    <main class="app" aria-busy="true" id="app">
+      <header class="brand-row">
+        <img class="brand-icon" src="assets/icon.svg" width="38" height="38" alt="">
+        <div class="brand-copy"><h1>AlwayLight<span class="brand-dot">.</span></h1><p>STAY ON. KEEP CREATING.</p></div>
+        <span class="status-pill" id="status-pill"><span></span><b id="status-label">连接中</b></span>
+      </header>
+
+      <section class="hero" id="hero" aria-labelledby="hero-title">
+        <div class="hero-copy"><p class="eyebrow">A LITTLE LIGHT, A LITTLE LONGER</p><h2 id="hero-title">让灵感，持续亮着。</h2><p id="hero-description">正在读取当前状态…</p></div>
+        <div class="sun-art" aria-hidden="true"><span class="orbit"></span><svg class="hero-sun"><use href="#i-sun"/></svg><span class="spark spark-one">✦</span><span class="spark spark-two">·</span></div>
+      </section>
+
+      <fieldset class="mode-group" id="mode-group" disabled>
+        <legend><span>运行模式</span><span class="section-aside">选择即生效</span></legend>
+        <label class="mode-option"><input type="radio" name="mode" value="display"><span class="mode-icon"><svg><use href="#i-sun"/></svg></span><span class="mode-copy"><strong>屏幕常亮</strong><small>屏幕不熄灭，系统持续运行</small></span><span class="radio-mark"><svg><use href="#i-check"/></svg></span></label>
+        <label class="mode-option"><input type="radio" name="mode" value="system"><span class="mode-icon"><svg><use href="#i-monitor"/></svg></span><span class="mode-copy"><strong>保持系统运行</strong><small>允许屏幕熄灭，适合后台跑 AI</small></span><span class="radio-mark"><svg><use href="#i-check"/></svg></span></label>
+        <label class="mode-option"><input type="radio" name="mode" value="default"><span class="mode-icon"><svg><use href="#i-moon"/></svg></span><span class="mode-copy"><strong>系统默认</strong><small>恢复电脑原有的节能设置</small></span><span class="radio-mark"><svg><use href="#i-check"/></svg></span></label>
+      </fieldset>
+
+      <section class="timer-section" aria-labelledby="timer-heading">
+        <div class="section-heading"><h2 id="timer-heading"><svg><use href="#i-timer"/></svg>定时结束</h2><span class="section-aside">到时恢复系统默认</span></div>
+        <form id="timer-form" novalidate>
+          <fieldset id="timer-controls" disabled aria-label="倒计时时长">
+            <div class="presets" role="group" aria-label="常用时长"><button type="button" data-minutes="30" aria-pressed="false">30 分钟</button><button type="button" data-minutes="60" aria-pressed="true">1 小时</button><button type="button" data-minutes="120" aria-pressed="false">2 小时</button></div>
+            <div class="timer-input-row"><label class="minutes-field"><span class="sr-only">自定义时长，1 至 1440 分钟</span><input id="minutes" type="number" inputmode="numeric" min="1" max="1440" step="1" value="60" required autocomplete="off" aria-describedby="timer-hint"><span>分钟</span></label><button class="start-button" type="submit"><span>开始倒计时</span><svg><use href="#i-arrow"/></svg></button></div>
+          </fieldset>
+        </form>
+        <div class="running-timer" id="running-timer" hidden><div><p>距离自动结束</p><strong id="countdown" role="timer" aria-label="剩余时间">01:00:00</strong></div><button type="button" id="cancel-timer">取消定时</button></div>
+        <p class="timer-hint" id="timer-hint">先选择一种保持运行的模式，即可设置定时。</p>
+      </section>
+
+      <p class="feedback" id="feedback" role="status" aria-live="polite" hidden></p>
+      <footer><span><svg><use href="#i-leaf"/></svg>仅本地运行 · 无需联网</span><span class="shortcut" id="shortcut" title="在 Chrome 扩展程序的快捷键页面中修改">⌘ ⇧ Y</span></footer>
+    </main>
+  </body>
+</html>

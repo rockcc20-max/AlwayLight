@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">AlwayLight</title>
+  <desc id="desc">A warm amber sun with a power switch at its heart, on a dark rounded square.</desc>
+  <rect width="128" height="128" rx="30" fill="#22231f"/>
+  <g fill="none" stroke="#f5bc46" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48.444 50.444a22 22 0 1 0 31.112 0"/>
+    <path d="M64 28v32"/>
+    <path d="M100 66h8M89.456 91.456l5.657 5.657M64 102v8M38.544 91.456l-5.657 5.657M28 66h-8M38.544 40.544l-5.657-5.657M89.456 40.544l5.657-5.657"/>
+  </g>
+</svg>

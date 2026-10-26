@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "AlwayLight",
+  "version": "1.0.0",
+  "description": "让灵感持续亮着。一键保持屏幕常亮或系统运行，支持倒计时自动恢复，安心等待 AI 任务。",
+  "minimum_chrome_version": "120",
+  "permissions": ["power", "storage", "alarms"],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_title": "AlwayLight · 屏幕常亮助手",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon-16.png",
+    "32": "assets/icon-32.png",
+    "48": "assets/icon-48.png",
+    "128": "assets/icon-128.png"
+  },
+  "commands": {
+    "toggle-keep-awake": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "切换屏幕常亮 / 系统默认"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; connect-src 'none'"
+  }
+}

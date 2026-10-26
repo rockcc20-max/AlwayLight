@@ -1,0 +1,14 @@
+{
+  "name": "alwaylight",
+  "version": "1.0.0",
+  "description": "A quiet keep-awake companion for long AI sessions.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "check": "node scripts/check.mjs && npm test",
+    "package": "npm run check && node scripts/package.mjs",
+    "preview": "node dev/server.mjs"
+  }
+}
